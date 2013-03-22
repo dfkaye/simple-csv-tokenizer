@@ -29,26 +29,63 @@
   exports.tokenize = tokenize;
 
   var COMMA = ',';
+  var EMPTY = '';
   var QUOTE = '"';
+  var RE_TRIM = /^\s+|\s+$/g;
 
   function tokenize(csv) {
-
+  
+    var len = csv.length;
+    var last = len - 1;
+    var quoted = false;
     var result = [];
-
-    var chars = csv.replace(/^\s+|\s+$/g, '').split('');
-    var len = chars.length;
-    var i;
-    var ch;
-    var token;
+    var token = EMPTY;
     
-    for (i = 0; i < len; i += 1) {
-        
-      // hold on - more to come
-      //result = tokenize();
-      ch = chars[i];
+    var ch, i;
 
+    for (i = 0; i < len; i += 1) {
+
+      ch = csv.charAt(i);
+      
+      if (ch === QUOTE) {
+          
+        ch = csv.charAt(i + 1);
+        i += 1;
+        quoted = !quoted;
+      }
+      
+      if ((ch === COMMA && !quoted) || i + 1 > last) {
+      
+        // push result based on ch and token contents...
+      
+        if (i + 1 > last) {
+          token += ch;
+        }
+        
+        // replace single chars - , " and ' with empty entry
+        if (token.match(/^(\,|\"|\')$/)) {
+          
+          // if comma, push an empty token ahead of the current token
+          if (token.match(/^(\,)$/)) {
+            result.push(EMPTY);
+          }
+            
+          token = EMPTY;
+        }
+
+        // trim whitespace and push this token
+        result.push(token.replace(RE_TRIM, ''));
+        
+        token = EMPTY;
+        
+      } else {
+        
+        // iterate for next ch
+        token += ch;
+      }
     }
 
+    return result;
   };
   
 }(this));
