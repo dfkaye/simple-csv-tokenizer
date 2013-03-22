@@ -48,4 +48,3 @@ __from node command line__
     cd ./simple-csv-tokenizer
   
     node tests/suite.js
-  
