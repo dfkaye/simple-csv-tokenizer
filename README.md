@@ -14,7 +14,23 @@ into shape.
 implementation & tests
 ====================
 
-*coming shortly*
+Not very sophisticated - no streams, no regex pre-processing, just pedestrian 
+one-char-at-a-time iteration of the input string, populating a result array with
+tokens.
+
+Some example input is taken from [Grey Wyvern](http://www.greywyvern.com/?post=258) 
+and from [Ben Nadel](http://www.bennadel.com/blog/2241-Parsing-CSV-Data-With-An-Input-Stream-And-A-Finite-State-Machine.htm).
+
+Example:
+
+    var input = '"hello, how are you?", "I am fine, thanks", "That\'s good"';
+    var expected = ["hello, how are you?", "I am fine, thanks", "That\'s good"];
+    var actual = tokenize(input);
+    
+    assert:
+    
+        actual.length === expected.length && actual.join() === expected.join()
+
 
 tape & testling
 ===============
@@ -26,10 +42,9 @@ testling worked for a while but has been broken lately because of browserify ___
 [![browser support](http://ci.testling.com/dfkaye/simple-csv-tokenizer.png)](http://ci.testling.com/dfkaye/simple-csv-tokenizer)
 
 
-
 __from node command line__
 
-  cd ./simple-csv-tokenizer
+    cd ./simple-csv-tokenizer
   
-  node tests/suite.js
+    node tests/suite.js
   
