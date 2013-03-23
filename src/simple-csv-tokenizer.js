@@ -30,7 +30,9 @@
   var EMPTY = '';
   var QUOTE = '"';
   var RE_TRIM = /^\s+|\s+$/g;
-
+  var RE_COMMA = /^(\,)$/;
+  var RE_SINGLE_CHARS = /^(\,|\"|\')$/;
+  
   function tokenize(csv) {
   
     var len = csv.length;
@@ -59,10 +61,10 @@
         }
         
         // replace single chars - , " and ' with empty entry
-        if (token.match(/^(\,|\"|\')$/)) {
+        if (token.match(RE_SINGLE_CHARS)) {
           
           // if comma, push an empty token ahead of the current token
-          if (token.match(/^(\,)$/)) {
+          if (token.match(RE_COMMA)) {
             result.push(EMPTY);
           }
             
@@ -70,7 +72,7 @@
         }
 
         // trim whitespace and push this token
-        result.push(token.replace(RE_TRIM, ''));
+        result.push(token.replace(RE_TRIM, EMPTY));
         
         token = EMPTY;
       } else {
