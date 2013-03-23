@@ -36,7 +36,6 @@
   function tokenize(csv) {
   
     var len = csv.length;
-    var last = len - 1;
     var quoted = false;
     var result = [];
     var token = EMPTY;
@@ -48,17 +47,16 @@
       ch = csv.charAt(i);
       
       if (ch === QUOTE) {
-          
-        ch = csv.charAt(i + 1);
+      
         i += 1;
+        ch = csv.charAt(i);
         quoted = !quoted;
       }
       
-      if ((ch === COMMA && !quoted) || i + 1 > last) {
+      // push result based on ch and token contents...
+      if ((ch === COMMA && !quoted) || i + 1 >= len) {
       
-        // push result based on ch and token contents...
-      
-        if (i + 1 > last) {
+        if (i + 1 >= len && typeof ch !== 'undefined') {
           token += ch;
         }
         
@@ -77,7 +75,6 @@
         result.push(token.replace(RE_TRIM, ''));
         
         token = EMPTY;
-        
       } else {
         
         // iterate for next ch
