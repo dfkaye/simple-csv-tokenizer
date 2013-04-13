@@ -35,12 +35,13 @@ Example:
 tape & testling
 ===============
 
-Using tape to test in order to use testling.  tape works on node.js command line.
-
-[testling](https://ci.testling.com/dfkaye/simple-csv-tokenizer) worked for a 
-while but has been broken lately (bad service hook setting)
+Using [tape](https://github.com/substack/tape) to run tests from the node.js 
+command line, and in order to use [testling](http://ci.testling.com/) from the
+github service hook.
 
 [![browser support](https://ci.testling.com/dfkaye/simple-csv-tokenizer.png)](https://ci.testling.com/dfkaye/simple-csv-tokenizer)
+
+[Things I've found about checking things in for testling to work](https://gist.github.com/dfkaye/5225546)
 
 
 __from node command line__
