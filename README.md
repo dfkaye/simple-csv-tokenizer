@@ -40,7 +40,7 @@ Using tape to test in order to use testling.  tape works on node.js command line
 [testling](https://ci.testling.com/dfkaye/simple-csv-tokenizer) worked for a 
 while but has been broken lately (bad service hook setting)
 
-[![browser support](http://ci.testling.com/dfkaye/simple-csv-tokenizer.png)](http://ci.testling.com/dfkaye/simple-csv-tokenizer)
+[![browser support](https://ci.testling.com/dfkaye/simple-csv-tokenizer.png)](https://ci.testling.com/dfkaye/simple-csv-tokenizer)
 
 
 __from node command line__
